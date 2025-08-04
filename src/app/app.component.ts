@@ -40,10 +40,10 @@ export class AppComponent implements OnInit{
     guidanceSize: 150,
 
     frameAspectRatio: 0.628,
-    framePadding: 10,
+    framePadding: 2,
     frameCornerColor: "#00FF00",
-    frameCornerHeight: 20,
-    frameCornerWidth: 70,
+    frameCornerHeight: 2,
+    frameCornerWidth: 7,
     frameBorderColor: "#00FF00",
     frameBorderWidth: 2,
     outOfFrameTransparency: 0.5,
