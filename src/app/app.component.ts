@@ -39,8 +39,9 @@ export class AppComponent implements OnInit{
     edgesWidth: 4,
     guidanceSize: 150,
 
+    // Mobile ID FrameAspectRatio 0.629 Passport 0.703
     frameAspectRatio: 0.703,
-    framePadding: 2,
+    framePadding: 14,
     frameCornerColor: "#00FF00",
     frameCornerHeight: 2,
     frameCornerWidth: 7,
@@ -49,6 +50,7 @@ export class AppComponent implements OnInit{
     outOfFrameTransparency: 0.5,
 
     lookAndFeel: {
+      documentSample:"Path to the assets of the document sample",
       showEdgesDuringCapture: true,
       targetFrameVisible: true,
       targetFrameSuccessColor: "#00FF00",
@@ -60,18 +62,20 @@ export class AppComponent implements OnInit{
     },
 
   
-
+    // Mandatory params
     criteria: {
       captureTimeout: 1700,
       centerToleranceFraction: 0.15,
-      longAxisThreshold: 85,
+      longAxisThreshold: 70,
       shortAxisThreshold: 60,
-      maxFillFraction: 1.8,
+      maxFillFraction: 2,
       minFillFraction: 0.65,
-      turnSkewAngleTolerance: 10,
+      turnSkewAngleTolerance: 90,
       pitchThreshold: 15,
       rollThreshold: 15
     },
+
+    // Guidance messages
 
     tapToDismissInstruction: { visible: true, text: "Tap to dismiss" },
     fitDocumentInstruction: { visible: true, text: "Fit document in the frame" },
@@ -86,22 +90,6 @@ export class AppComponent implements OnInit{
     capturePauseInstruction: { visible: true, text: "Capture is paused. Tap to continue." }
   };
 
-
-waitForSDK(): Promise<void> {
-  return new Promise((resolve) => {
-    const check = () => {
-      const KfxWebSDK = (window as any).KfxWebSDK;
-      if (KfxWebSDK && KfxWebSDK.Capture) {
-        console.log('KfxWebSDK loaded');
-        resolve();
-      } else {
-        console.warn('Waiting for KfxWebSDK...');
-        setTimeout(check, 100); // Retry every 100ms
-      }
-    };
-    check();
-  });
-}
 
 
   getSDK(): any {
