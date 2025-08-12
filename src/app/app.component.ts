@@ -168,7 +168,7 @@ export class AppComponent implements OnInit{
         );
       },
       (mode: any) => {
-        alert(mode);
+        alert('Device is unsupported');
       },
       KfxWebSDK.resolution.RES_FULL_HD
     );
