@@ -113,8 +113,19 @@ export class AppComponent implements OnInit{
 
   capturedImage: string | null = null;
 
-  captureFeature(): void{
-    KfxWebSDK.Capture.create(
+  
+
+
+
+
+  captureFeature(): void {
+    console.log('Capture button clicked');
+
+    KfxWebSDK.Utilities.supportsAutoCapture(
+      () => {
+        console.log('AutoCapture supported');
+
+        KfxWebSDK.Capture.create(
           this.options,
           () => {
             console.log('KfxWebSDK create successful');
@@ -155,66 +166,13 @@ export class AppComponent implements OnInit{
             console.error('Create Error', error);
           }
         );
+      },
+      (mode: any) => {
+        alert(mode);
+      },
+      KfxWebSDK.resolution.RES_FULL_HD
+    );
   }
-
-
-
-
-  // captureFeature(): void {
-  //   console.log('Capture button clicked');
-
-  //   KfxWebSDK.Utilities.supportsAutoCapture(
-  //     () => {
-  //       console.log('AutoCapture supported');
-
-  //       KfxWebSDK.Capture.create(
-  //         this.options,
-  //         () => {
-  //           console.log('KfxWebSDK create successful');
-
-  //           // Remove any SDK fallback <input>
-  //           document.querySelectorAll('input[type="file"]').forEach(el => el.remove());
-
-  //           KfxWebSDK.Capture.takePicture(
-  //             (imageData: any) => {
-  //               const canvas = document.createElement('canvas');
-  //               canvas.width = imageData.width;
-  //               canvas.height = imageData.height;
-  //               const ctx = canvas.getContext('2d');
-
-  //               if (!ctx) {
-  //                 console.error('Could not get 2D context');
-  //                 return;
-  //               }
-
-  //               const imgData = new ImageData(imageData.data, imageData.width, imageData.height);
-  //               ctx.putImageData(imgData, 0, 0);
-
-  //               const imageContainer = document.getElementById('capturedImageContainer');
-  //               if (imageContainer) {
-  //                 imageContainer.innerHTML = '';
-  //                 imageContainer.appendChild(canvas);
-  //               }
-
-  //               const base64Image = canvas.toDataURL('image/png');
-  //               console.log('Base64:', base64Image);
-  //             },
-  //             (error: any) => {
-  //               console.error('TakePicture Error', error);
-  //             }
-  //           );
-  //         },
-  //         (error: any) => {
-  //           console.error('Create Error', error);
-  //         }
-  //       );
-  //     },
-  //     () => {
-  //       alert('Your device or browser does not support Kofax camera capture.');
-  //     },
-  //     KfxWebSDK.resolution.RES_FULL_HD
-  //   );
-  // }
 
 
 
